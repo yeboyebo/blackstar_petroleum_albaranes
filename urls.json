@@ -2,20 +2,6 @@
     "modifications": [
         {
             "type": "insertAfterNode",
-            "path": "/portal",
-            "value": {
-                "clientes": {}
-            }
-        },
-        {
-            "type": "insertAfterNode",
-            "path": "/clientes",
-            "value": {
-                "agentes": {}
-            }
-        },
-        {
-            "type": "insertAfterNode",
             "path": "/models/flfacturac/agruparalbaranesprov",
             "value": {
                 "bi_cargapedidoscli": null

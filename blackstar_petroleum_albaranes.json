@@ -46,6 +46,10 @@
             {
                 "path": "apps/portal/templates/portal/",
                 "name": "app_portal__menu_portal.json"
+            },
+            {
+                "path": "apps/principal/templates/principal/",
+                "name": "app_principal__menu_principal.json"
             }
         ]
     },

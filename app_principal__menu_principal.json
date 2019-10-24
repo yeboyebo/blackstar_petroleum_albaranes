@@ -1,0 +1,24 @@
+{
+    "modifications": [
+        {
+            "type": "insertAfterItem",
+            "path": "/items[root]",
+            "value": {
+                "NAME": "clientes",
+                "TEXT": "CLIENTES",
+                "URL": "clientes",
+                "ICON": "insert_chart"
+            }
+        },
+        {
+            "type": "insertAfterItem",
+            "path": "/items[clientes]",
+            "value": {
+                "NAME": "agentes",
+                "TEXT": "AGENTES",
+                "URL": "agentes",
+                "ICON": "insert_chart"
+            }
+        }
+    ]
+}
