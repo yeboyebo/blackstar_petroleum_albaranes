@@ -1,7 +1,32 @@
 {
     "modifications": {
         "patchScript": [],
-        "addFile": [],
+        "addFile": [
+            {
+                "path": "models/flfacturac/",
+                "name": "model_flfacturac__bi_cargapedidoscli.py"
+            },
+            {
+                "path": "models/flfacturac/",
+                "name": "model_flfacturac__bi_cargapedidoscli_def.py"
+            },
+            {
+                "path": "models/flfacturac/",
+                "name": "model_flfacturac__bi_lineascargapedidoscli.py"
+            },
+            {
+                "path": "models/flfacturac/",
+                "name": "model_flfacturac__bi_lineascargapedidoscli_def.py"
+            },
+            {
+                "path": "models/flfactalma/",
+                "name": "model_flfactalma__movistock.py"
+            },
+            {
+                "path": "models/flfactalma/",
+                "name": "model_flfactalma__movistock_def.py"
+            }
+        ],
         "deleteFile": [],
         "replaceFile": [
             {
@@ -17,6 +42,10 @@
             {
                 "path": "config/",
                 "name": "registros.json"
+            },
+            {
+                "path": "apps/portal/templates/portal/",
+                "name": "app_portal__menu_portal.json"
             }
         ]
     },

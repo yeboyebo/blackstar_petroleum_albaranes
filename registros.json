@@ -1,3 +1,25 @@
 {
-    "modifications": []
+    "modifications": [
+        {
+            "type": "insertAfterNode",
+            "path": "/flfacturac/agruparalbaranesprov",
+            "value": {
+                "bi_cargapedidoscli": null
+            }
+        },
+        {
+            "type": "insertAfterNode",
+            "path": "/flfacturac/bi_cargapedidoscli",
+            "value": {
+                "bi_lineascargapedidoscli": null
+            }
+        },
+        {
+            "type": "insertAfterNode",
+            "path": "/flfactalma/stocks",
+            "value": {
+                "movistock": null
+            }
+        }
+    ]
 }
