@@ -1,0 +1,91 @@
+{
+    "querystring": {},
+    "title": "Solicitud de presupuesto",
+    "schema": {},
+    "focus": "fdb_titulo",
+    "layout": {
+        "groupBoxFields": {
+            "componente": "YBGroupBox",
+            "className": "gbform",
+            "style": {
+                "float": "left",
+                "overflow": "hidden",
+                "width": "100%",
+                "padding": "0 10px"
+            },
+            "layout": {
+                "fdb_titulo": {
+                    "componente": "YBFieldDB",
+                    "prefix": "otros",
+                    "key": "titulo",
+                    "label": "Asunto",
+                    "tipo": 3,
+                    "actions": [
+                        {
+                            "signal": "enterPressed",
+                            "receiver": "fdb_texto",
+                            "key": "selectCantidad",
+                            "success": []
+                        }
+                    ]
+                },
+                "fdb_texto": {
+                    "componente": "YBFieldDB",
+                    "prefix": "otros",
+                    "className": "borderText",
+                    "key": "texto",
+                    "label": " ",
+                    "tipo": 6
+                }
+            }
+        },
+        "groupBoxAcciones": {
+            "componente": "YBGroupBox",
+            "className": "actionGB",
+            "layout": {
+                "envioMailButton": {
+                    "componente": "YBButton",
+                    "prefix": "presupuestoscli",
+                    "label": "Enviar",
+                    "className": "floatRigh",
+                    "buttonType": "raised",
+                    "style": {
+                        "marginTop": "10px"
+                    },
+                    "action": {
+                        "key": "envioPresupuesto",
+                        "success": [{"slot": "toast", "tipo": "success", "mensaje": "Solicitud enviada"}, {"slot": "refrescar"}],
+                        "error": [{"slot": "toast", "mensaje": "Error inesperado, consulte administrador"}]
+                    }
+                }
+            }
+        }
+    },
+    "acciones": {
+        "selectCantidad": {
+            "action": "select"
+        },
+        "envioPresupuesto": {
+            "label": "Enviar Presupuesto",
+            "action": "legacy",
+            "serverAction": "envioPresupuesto",
+            "prefix": "presupuestoscli",
+            "params": [
+                {
+                    "tipo": 37,
+                    "required": false,
+                    "verbose_name": "titulo",
+                    "key": "titulo",
+                    "null": true
+                },
+                {
+                    "tipo": 3,
+                    "required": false,
+                    "verbose_name": "texto",
+                    "key": "texto",
+                    "null": true
+                }
+            ]
+        }
+    }
+}

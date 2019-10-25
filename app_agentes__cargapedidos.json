@@ -1,0 +1,246 @@
+{
+    "initValidation": {
+        "error": {
+            "aplic": "agentes",
+            "prefix": "bi_cargapedidoscli",
+            "template": "mastercargapedidos",
+            "msg": "No pertenece a tu usuario"
+        }
+    },
+    "querystring": {},
+    "schema": {
+        "bi_lineascargapedidoscli": {
+            "rel": "idcargapedidos",
+            "querystring": {}
+        }
+    },
+    "title": "Carga diaria de pedidos",
+    "layout": {
+        "groupBoxAcciones": {
+            "componente": "YBGroupBox",
+            "className": "",
+            "style": {},
+            "layout": {
+                "nuevalineacargapedidosButton": {
+                    "componente": "YBButton",
+                    "label": "Añadir",
+                    "className": "floatRight",
+                    "buttonType": "raised",
+                    "secondary": true,
+                    "primary": false,
+                    "prefix": "bi_cargapedidoscli",
+                    "action": {
+                        "key": "nuevalineacargapedidos",
+                        "success": [{"custom": "cargapedidos", "slot": "refrescar"}]
+                    }
+                }
+            }
+        },
+        "masterLineascargapedidoscli": {
+            "componente": "YBTable",
+            "class": "claseGrid",
+            "label": "Pedidos",
+            "prefix": "bi_lineascargapedidoscli",
+            "filter": "buscador",
+            "paginacion": true,
+            "columns": [
+                {"tipo": "foreignfield", "key": "instalacion","label":"Instalación", "width": 120},
+                {
+                    "tipo": "field", 
+                    "label": "GOA", 
+                    "key": "litrosgoa", 
+                    "width": 60,
+                    "editable": true,
+                    "type": "number",
+                    "act": {
+                        "key": "editarLitrosGOA",
+                        "success": [
+                            {"slot": "refrescar", "custom": "cargapedidos"}
+                        ]
+                    }
+                },
+                {"tipo": "field", "label": "PVP GOA", "key": "importegoa", "width": 80},
+                {
+                    "tipo": "field", 
+                    "label": "GOB", 
+                    "key": "litrosgob", 
+                    "width": 60,
+                    "editable": true,
+                    "type": "number",
+                    "act": {
+                        "key": "editarLitrosGOB",
+                        "success": [
+                            {"slot": "refrescar", "custom": "cargapedidos"}
+                        ]
+                    }
+                },
+                {"tipo": "field", "label": "PVP GOB", "key": "importegob", "width": 80},
+                {
+                    "tipo": "field", 
+                    "label": "GOC", 
+                    "key": "litrosgoc", 
+                    "width": 60,
+                    "editable": true,
+                    "type": "number",
+                    "act": {
+                        "key": "editarLitrosGOC",
+                        "success": [
+                            {"slot": "refrescar", "custom": "cargapedidos"}
+                        ]
+                    }
+                },
+                {"tipo": "field", "label": "PVP GOC", "key": "importegoc", "width": 80},
+                {
+                    "tipo": "field", 
+                    "label": "SP95", 
+                    "key": "litrossp95", 
+                    "width": 60,
+                    "editable": true,
+                    "type": "number",
+                    "act": {
+                        "key": "editarLitrosSP95",
+                        "success": [
+                            {"slot": "refrescar", "custom": "cargapedidos"}
+                        ]
+                    }
+                },
+                {"tipo": "field", "label": "PVP SP95", "key": "importesp95", "width": 80},
+                {
+                    "tipo": "field", 
+                    "label": "SP98", 
+                    "key": "litrossp98", 
+                    "width": 60,
+                    "editable": true,
+                    "type": "number",
+                    "act": {
+                        "key": "editarLitrosSP98",
+                        "success": [
+                            {"slot": "refrescar", "custom": "cargapedidos"}
+                        ]
+                    }
+                },
+                {"tipo": "field", "label": "PVP SP98", "key": "importesp98", "width": 80},
+                {"tipo": "foreignfield", "key": "cliente", "label": "Cliente", "width": 220},
+                {
+                    "tipo": "field", 
+                    "key": "ordendecarga", 
+                    "width": 300,
+                    "flex": 3,
+                    "editable": true, 
+                    "type": "string",
+                    "act": {
+                        "key": "editarOrdendeCarga",
+                        "success": [
+                            {"slot": "refrescar", "custom": "cargapedidos"}
+                        ]
+                    }
+                },
+                {
+                    "tipo": "act",
+                    "key": "delete",
+                    "label": "Borrar Linea",
+                    "success": [
+                        {"slot": "refrescar", "custom": "cargapedidos"}
+                    ]
+                }
+            ],
+            "rowclick": ""
+        }
+    },
+    "acciones": {
+        "delete": {
+            "action": "deleteRow",
+            "icon": "delete"
+        },
+        "nuevalineacargapedidos": {
+            "action": "legacy",
+            "prefix": "bi_cargapedidoscli",
+            "serverAction": "nuevalineacargapedidos",
+            "icon": "cloud_download"
+        },
+        "editarLitrosGOA": {
+            "action": "legacy",
+            "icon": "add_circle",
+            "serverAction": "editarLitros",
+            "prefix": "bi_lineascargapedidoscli",
+            "params": [
+                {
+                    "tipo": 3,
+                    "verbose_name": "GOA",
+                    "key": "litrosgoa",
+                    "validaciones": null
+                }
+            ]
+        },
+        "editarLitrosGOB": {
+            "action": "legacy",
+            "icon": "add_circle",
+            "serverAction": "editarLitros",
+            "prefix": "bi_lineascargapedidoscli",
+            "params": [
+                {
+                    "tipo": 3,
+                    "verbose_name": "GOB",
+                    "key": "litrosgob",
+                    "validaciones": null
+                }
+            ]
+        },
+        "editarLitrosGOC": {
+            "action": "legacy",
+            "icon": "add_circle",
+            "serverAction": "editarLitros",
+            "prefix": "bi_lineascargapedidoscli",
+            "params": [
+                {
+                    "tipo": 3,
+                    "verbose_name": "GOC",
+                    "key": "litrosgoc",
+                    "validaciones": null
+                }
+            ]
+        },
+        "editarLitrosSP95": {
+            "action": "legacy",
+            "icon": "add_circle",
+            "serverAction": "editarLitros",
+            "prefix": "bi_lineascargapedidoscli",
+            "params": [
+                {
+                    "tipo": 3,
+                    "verbose_name": "SP95",
+                    "key": "litrossp95",
+                    "validaciones": null
+                }
+            ]
+        },
+        "editarLitrosSP98": {
+            "action": "legacy",
+            "icon": "add_circle",
+            "serverAction": "editarLitros",
+            "prefix": "bi_lineascargapedidoscli",
+            "params": [
+                {
+                    "tipo": 3,
+                    "verbose_name": "SP98",
+                    "key": "litrossp98",
+                    "validaciones": null
+                }
+            ]
+        },
+        "editarOrdendeCarga": {
+            "action": "legacy",
+            "icon": "add_circle",
+            "serverAction": "editarOrdendeCarga",
+            "prefix": "bi_lineascargapedidoscli",
+            "params": [
+                {
+                    "tipo": 3,
+                    "verbose_name": "Orden de carga",
+                    "key": "ordendecarga",
+                    "validaciones": null
+                }
+            ]
+        }
+    }
+}

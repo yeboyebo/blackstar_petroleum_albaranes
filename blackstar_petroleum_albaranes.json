@@ -1,6 +1,55 @@
 {
     "modifications": {
-        "patchScript": [],
+        "patchScript": [
+            {
+                "path": "models/flfactppal/",
+                "name": "model_flfactppal__formaspago.py"
+            },
+            {
+                "path": "models/flfactppal/",
+                "name": "model_flfactppal__formaspago_def.py"
+            },
+            {
+                "path": "models/flfacturac/",
+                "name": "model_flfacturac__albaranescli_def.py"
+            },
+            {
+                "path": "models/flfacturac/",
+                "name": "model_flfacturac__albaranescli.py"
+            },
+            {
+                "path": "models/flfacturac/",
+                "name": "model_flfacturac__facturascli_def.py"
+            },
+            {
+                "path": "models/flfacturac/",
+                "name": "model_flfacturac__facturascli.py"
+            },
+            {
+                "path": "models/flfacturac/",
+                "name": "model_flfacturac__flfacturac_def.py"
+            },
+            {
+                "path": "models/flfacturac/",
+                "name": "model_flfacturac__lineasalbaranescli_def.py"
+            },
+            {
+                "path": "models/flfacturac/",
+                "name": "model_flfacturac__presupuestoscli.py"
+            },
+            {
+                "path": "models/flfacturac/",
+                "name": "model_flfacturac__presupuestoscli_def.py"
+            },
+            {
+                "path": "models/flfacturac/",
+                "name": "model_flfacturac__lineasalbaranescli.py"
+            },
+            {
+                "name": "app_portal__views_portal.py",
+                "path": "apps/portal/viewset/"
+            }
+        ],
         "addFile": [
             {
                 "path": "models/flfacturac/",
@@ -25,6 +74,66 @@
             {
                 "path": "models/flfactalma/",
                 "name": "model_flfactalma__movistock_def.py"
+            },
+            {
+                "path": "apps/agentes/",
+                "name": "app_agentes____init__.py"
+            },
+            {
+                "path": "apps/agentes/templates/agentes/",
+                "name": "app_agentes__menu_agentes.json"
+            },
+            {
+                "path": "apps/agentes/templates/agentes/plantillas/",
+                "name": "app_agentes__cargapedidos.json"
+            },
+            {
+                "path": "apps/agentes/templates/agentes/plantillas/",
+                "name": "app_agentes__albaranescli.json"
+            },
+            {
+                "path": "apps/agentes/templates/agentes/plantillas/",
+                "name": "app_agentes__newrecordalbaranescli.json"
+            },
+            {
+                "path": "apps/agentes/templates/agentes/plantillas/",
+                "name": "app_agentes__albaranesagente.json"
+            },
+            {
+                "path": "apps/agentes/templates/agentes/plantillas/",
+                "name": "app_agentes__mastercargapedidos.json"
+            },
+            {
+                "path": "apps/agentes/templates/agentes/plantillas/",
+                "name": "app_agentes__nuevoalbaranagente.json"
+            },
+            {
+                "path": "apps/agentes/templates/agentes/plantillas/",
+                "name": "app_agentes__bi_cargapedidoscli.json"
+            },
+            {
+                "path": "apps/agentes/viewset/",
+                "name": "app_agentes__views_agentes.py"
+            },
+            {
+                "path": "apps/clientes/",
+                "name": "app_clientes____init__.py"
+            },
+            {
+                "path": "apps/clientes/templates/clientes/",
+                "name": "app_clientes__menu_clientes.json"
+            },
+            {
+                "path": "apps/clientes/templates/clientes/plantillas/",
+                "name": "app_clientes__solicitud.json"
+            },
+            {
+                "path": "apps/clientes/templates/clientes/plantillas/",
+                "name": "app_clientes__cliente.json"
+            },
+            {
+                "path": "apps/clientes/viewset/",
+                "name": "app_clientes__views_clientes.py"
             }
         ],
         "deleteFile": [],

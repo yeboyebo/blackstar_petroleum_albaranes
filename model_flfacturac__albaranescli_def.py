@@ -1,23 +1,8 @@
-# @class_declaration interna #
-from YBLEGACY import qsatype
+
+# @class_declaration blackstar_petroleum_albaranes #
 
 
-class interna(qsatype.objetoBase):
-
-    ctx = qsatype.Object()
-
-    def __init__(self, context=None):
-        self.ctx = context
-
-
-# @class_declaration blackstar_petroleum_albaranes_albaranes #
-from YBLEGACY.constantes import *
-
-
-class blackstar_petroleum_albaranes(interna):
-
-    def blackstar_petroleum_albaranes_getDesc(self):
-        return None
+class blackstar_petroleum_albaranes(flfacturac):
 
     def blackstar_petroleum_albaranes_initValidation(self, name, data=None):
         response = True
@@ -41,7 +26,7 @@ class blackstar_petroleum_albaranes(interna):
 
     def blackstar_petroleum_albaranes_getFilters(self, model, name, template=None):
         filters = []
-        if name == 'pedidosagente':
+        if name == 'albaranesagente':
             usr = qsatype.FLUtil.nameUser()
             agente = agentes.objects.filter(dnicif__exact=usr)
             return [{'criterio': 'codagente__in', 'valor': [agente[0].codagente]}]
@@ -56,30 +41,13 @@ class blackstar_petroleum_albaranes(interna):
         return fields
 
     def blackstar_petroleum_albaranes_field_colorRow(self, model):
-        if model.estado == "Cerrada":
+        if not model.ptefactura:
             return "cSuccess"
         else:
             return None
-            print(cantidad, cantmontada)
         return None
 
-    def blackstar_petroleum_albaranes_nuevacargapedidos(self, model):
-        print("nueva carga de pedidos")
-        usr = qsatype.FLUtil.nameUser()
-        agente = agentes.objects.filter(dnicif__exact=usr)
-        codagente = agente[0].codagente
-        curLCP = qsatype.FLSqlCursor(u"bi_cargapedidoscli")
-        curLCP.setModeAccess(curLCP.Insert)
-        curLCP.refreshBuffer()
-        curLCP.setValueBuffer("estado", "Abierta")
-        curLCP.setValueBuffer("codagente", codagente)
-        curLCP.setValueBuffer("fechaalta", str(qsatype.Date())[:10])
-
-        if not curLCP.commitBuffer():
-            return False
-        return True
-
-    def blackstar_petroleum_albaranes_nuevalineacargapedidos(self, model, oParam):
+    def blackstar_petroleum_albaranes_nuevoalbaran(self, model, oParam):
         if "codalmacen" not in oParam and "codcliente" not in oParam:
             response = {}
             response['status'] = -1
@@ -122,23 +90,37 @@ class blackstar_petroleum_albaranes(interna):
                 return False
         return True
 
-    def blackstar_petroleum_albaranes_dameTemplateCargaPedidoscli(self, model):
-        print("damtetemplatecargapedidoscli")
-        return True
-
-    def blackstar_petroleum_albaranes_dameCargaAgente(self, model):
-        print("???")
-        url = '/agentes/bi_cargapedidoscli/' + str(model.idcargapedidos) + '/cargapedidos'
+    def blackstar_petroleum_albaranes_damenuevoalbaran(self, model):
+        usr = qsatype.FLUtil.nameUser()
+        codagente = qsatype.FLUtil.sqlSelect(u"agentes", u"codagente", ustr(u"dnicif = '", usr, "'"))
+        url = '/agentes/albaranescli/newRecord?p_codagente=' + codagente
         return url
 
-    def blackstar_petroleum_albaranes_cerrarcargapedidos(self, model, cursor):
-        estado = cursor.valueBuffer("estado")
-        if cursor.valueBuffer("estado") == "Abierta":
-            estado = "Cerrada"
-        elif cursor.valueBuffer("estado") == "Cerrada":
-            estado = "Abierta"
-        cursor.setValueBuffer("estado", estado)
-        if not cursor.commitBuffer():
+    def blackstar_petroleum_albaranes_nuevalineaalbaran(self, model, oParam, cursor):
+        print(oParam)
+        print(cursor.valueBuffer("idalbaran"))
+        if not cursor.valueBuffer("ptefactura"):
+            resul = {}
+            resul['status'] = -3
+            resul['msg'] = "Albaran facturado"
+            return resul
+
+        _cFL = qsatype.FactoriaModulos.get('formRecordlineasalbaranescli').iface.pub_commonCalculateField
+        descripcion = qsatype.FLUtil.sqlSelect(u"articulos", u"descripcion", ustr(u"referencia = '", oParam['codarticulo'], "'"))
+        curL = qsatype.FLSqlCursor(u"lineasalbaranescli")
+        curL.setModeAccess(curL.Insert)
+        curL.refreshBuffer()
+        curL.setValueBuffer(u"idalbaran", cursor.valueBuffer("idalbaran"))
+        curL.setValueBuffer(u"referencia", oParam['codarticulo'])
+        curL.setValueBuffer(u"descripcion", descripcion)
+        curL.setValueBuffer(u"cantidad", 0)
+        curL.setValueBuffer(u"pvpunitario", 0)
+        curL.setValueBuffer(u"pvpsindto", _cFL(u"pvpsindto", curL))
+        curL.setValueBuffer(u"pvptotal", _cFL(u"pvptotal", curL))
+        curL.setValueBuffer(u"codimpuesto", _cFL(u"codimpuesto", curL))
+        curL.setValueBuffer(u"iva", _cFL(u"iva", curL))
+        curL.setValueBuffer(u"recargo", _cFL(u"recargo", curL))
+        if not curL.commitBuffer():
             return False
         return True
 
@@ -160,43 +142,15 @@ class blackstar_petroleum_albaranes(interna):
     def getForeignFields(self, model, template=None):
         return self.ctx.blackstar_petroleum_albaranes_getForeignFields(model, template)
 
-    def getDesc(self):
-        return self.ctx.blackstar_petroleum_albaranes_getDesc()
-
-    def nuevacargapedidos(self, model):
-        return self.ctx.blackstar_petroleum_albaranes_nuevacargapedidos(model)
-
-    def cerrarcargapedidos(self, model, cursor):
-        return self.ctx.blackstar_petroleum_albaranes_cerrarcargapedidos(model, cursor)
-
-    def nuevalineacargapedidos(self, model, oParam):
-        return self.ctx.blackstar_petroleum_albaranes_nuevalineacargapedidos(model, oParam)
-
-    def dameTemplateCargaPedidoscli(self, model):
-        return self.ctx.blackstar_petroleum_albaranes_dameTemplateCargaPedidoscli(model)
-
-    def dameCargaAgente(self, model):
-        return self.ctx.blackstar_petroleum_albaranes_dameCargaAgente(model)
+    def nuevoalbaran(self, model, oParam):
+        return self.ctx.blackstar_petroleum_albaranes_nuevoalbaran(model, oParam)
 
     def field_colorRow(self, model):
         return self.ctx.blackstar_petroleum_albaranes_field_colorRow(model)
 
+    def damenuevoalbaran(self, model):
+        return self.ctx.blackstar_petroleum_albaranes_damenuevoalbaran(model)
 
-# @class_declaration head #
-class head(blackstar_petroleum_albaranes):
+    def nuevalineaalbaran(self, model, oParam, cursor):
+        return self.ctx.blackstar_petroleum_albaranes_nuevalineaalbaran(model, oParam, cursor)
 
-    def __init__(self, context=None):
-        super().__init__(context)
-
-
-# @class_declaration ifaceCtx #
-class ifaceCtx(head):
-
-    def __init__(self, context=None):
-        super().__init__(context)
-
-
-# @class_declaration FormInternalObj #
-class FormInternalObj(qsatype.FormDBWidget):
-    def _class_init(self):
-        self.iface = ifaceCtx(self)

@@ -1,0 +1,82 @@
+{
+    "querystring": {
+        "p_l": 50,
+        "p_c": true,
+        "o_1": "idcargapedidos",
+        "s_estado": "Abierta",
+        "f_pedidosagente": null
+    },
+    "schema": {},
+    "layout": {
+        "labelAgente": {
+            "componente": "YBLabel",
+            "text": "%yb1",
+            "style": {
+                "fontSize": "19px",
+                "textAlign": "center",
+                "width": "100%",
+                "fontWeight": "bold"
+            },
+            "params": [{"type": "calc", "key": "nombreAgente"}]
+        },
+        "groupBoxAcciones": {
+            "componente": "YBGroupBox",
+            "className": "",
+            "style": {},
+            "layout": {
+                "nuevacargapedidosButton": {
+                    "componente": "YBButton",
+                    "label": "Añadir",
+                    "className": "floatRight",
+                    "buttonType": "raised",
+                    "secondary": true,
+                    "primary": false,
+                    "prefix": "bi_cargapedidoscli",
+                    "action": {
+                        "key": "nuevacargapedidos",
+                        "success": [{"custom": "mastercargapedidos", "slot": "refrescar"}]
+                    }
+                }
+            }
+        },
+        "masterCargapedidoscli": {
+            "componente": "YBGrid",
+            "prefix": "bi_cargapedidoscli",
+            "filter": "buscador",
+            "colorRowField": "rowColor",
+            "columns": [
+                {"tipo": "field", "listpos": "title", "key": "fechaalta", "width": 200,"flex":3},
+                {"tipo": "field", "listpos": "secondaryitem", "key": "estado", "label": "Estado", "width": 50},
+                {
+                    "tipo": "act",
+                    "key": "delete",
+                    "label": "Borrar Linea",
+                    "success": [
+                        {"slot": "refrescar", "custom": "mastercargapedidos"}
+                    ]
+                }
+            ],
+            "rowclick": "dameCargaAgente"
+        }
+    },
+    "acciones": {
+        "delete": {
+            "action": "deleteRow",
+            "icon": "delete"
+        },
+        "cerrarcargapedidos": {
+            "action": "legacy",
+            "serverAction": "cerrarcargapedidos",
+            "icon": "lock"
+        },
+        "nuevacargapedidos": {
+            "action": "legacy",
+            "serverAction": "nuevacargapedidos",
+            "icon": "cloud_download"
+        },
+        "dameCargaAgente": {
+            "action": "goto",
+            "serverAction": "dameCargaAgente"
+        }
+    }
+}

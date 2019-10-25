@@ -1,0 +1,47 @@
+{
+    "querystring": {},
+    "schema": {},
+    "layout": {
+        "newRecordalbaranescli": {
+            "prefix": "albaranescli",
+            "componente": "YBForm",
+            "class": "claseGrid",
+            "submit": "create",
+            "success": [{"slot": "redirect"}],
+            "groupbox": "acordeon",
+            "return": true,
+            "fields": {
+                "gb__datosGenerales": {
+                    "title": "Datos generales",
+                    "fields": {
+                        "codagente": {"disabled": true},
+                        "codejercicio": {"disabled": true},
+                        "codserie": {"disabled": true},
+                        "codcliente": {                            
+                            "rel": "clientes",
+                            "aplic": "principal",
+                            "key": "codcliente",
+                            "desc": "nombre"
+                        },
+                        "codalmacen": {                            
+                            "rel": "almacenes",
+                            "aplic": "principal",
+                            "key": "codalmacen",
+                            "desc": "nombre"
+                        },
+                        "codpago": {                            
+                            "rel": "formaspago",
+                            "aplic": "principal",
+                            "key": "codpago",
+                            "desc": "codpago"
+                        },
+                        "bi_idprovinciaentrega": {},
+                        "bi_ordendecarga": {}
+                    }
+                }                   
+            },
+            "exclude": {}    
+        }
+    },
+    "acciones": {}
+}

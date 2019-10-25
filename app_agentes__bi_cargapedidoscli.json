@@ -1,0 +1,41 @@
+{
+    "querystring": {
+        "p_l": 10,
+        "p_c": true,
+        "o_1": "-fecha",
+        "o_2": "-codigo",
+        "f_facturascliente": null
+    },
+    "title": "Facturas de cliente",
+    "schema": {},
+    "layout": {
+        "masterFacturasGrid": {
+            "componente": "YBList",
+            "class": "claseGrid",
+            "label": "Facturas de Cliente",
+            "prefix": "facturascli",
+            "filter": "buscador",
+            "paginacion": true,
+            "columns": [
+                {"tipo": "field", "listpos": "title", "key": "codigo", "width": 120},
+                {"tipo": "field", "listpos": "body", "key": "fecha"},
+                {"tipo": "field", "listpos": "subtitle", "key": "nombrecliente", "width": 200},
+                {"tipo": "field", "listpos": "secondaryitem", "key": "total", "width": 90},
+                {
+                    "tipo": "act",
+                    "key": "dameFactura",
+                    "label": "dameestado",
+                    "success": []
+                }
+            ],
+            "rowclick": ""
+        }
+    },
+    "acciones": {
+        "dameFactura": {
+            "action": "getReport",
+            "serverAction": "facturaCliente",
+            "icon": "cloud_download"
+        }
+    }
+}

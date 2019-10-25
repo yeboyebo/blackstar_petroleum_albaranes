@@ -1,0 +1,115 @@
+{
+    "querystring": {
+        "p_l": 1,
+        "p_c": true
+    },
+    "schema": {},
+    "layout": {
+        "groupBoxForm": {
+            "componente": "YBGroupBox",
+            "className": "gbform",
+            "style": {},
+            "layout": {
+                "groupBoxForm1": {
+                    "componente": "YBGroupBox",
+                    "className": "",
+                    "style": {},
+                    "layout": {
+                        "codalmacen": {
+                            "tipo": 56,
+                            "componente": "YBFieldDB",
+                            "prefix": "otros",
+                            "rel": "almacenes",
+                            "aplic": "agentes",
+                            "key": "codalmacen",
+                            "desc": "nombre",
+                            "auto_name": "Almacén",
+                            "null": true
+                        },
+                        "codcliente": {
+                            "tipo": 56,
+                            "componente": "YBFieldDB",
+                            "prefix": "otros",
+                            "rel": "clientes",
+                            "aplic": "agentes",
+                            "key": "codcliente",
+                            "desc": "nombre",
+                            "auto_name": "Cliente",
+                            "null": true
+                        }
+                    }
+                },
+                "groupBoxForm2": {
+                    "componente": "YBGroupBox",
+                    "className": "",
+                    "style": {},
+                    "layout": {
+                        "goa": {
+                            "tipo": 18,
+                            "componente": "YBFieldDB",
+                            "prefix": "otros",
+                            "key": "goa",
+                            "label": "Gasoleo A",
+                            "null": true
+                        },
+                        "gob": {
+                            "tipo": 18,
+                            "componente": "YBFieldDB",
+                            "prefix": "otros",
+                            "key": "gob",
+                            "label": "Gasoleo B",
+                            "null": true
+                        },
+                        "goc": {
+                            "tipo": 18,
+                            "componente": "YBFieldDB",
+                            "prefix": "otros",
+                            "key": "goc",
+                            "label": "Gasoleo C",
+                            "null": true
+                        },
+                        "sp95": {
+                            "tipo": 18,
+                            "componente": "YBFieldDB",
+                            "prefix": "otros",
+                            "key": "sp95",
+                            "label": "SP95",
+                            "null": true
+                        },
+                        "sp98": {
+                            "tipo": 18,
+                            "componente": "YBFieldDB",
+                            "prefix": "otros",
+                            "key": "sp98",
+                            "label": "SP98",
+                            "null": true
+                        }
+                    }
+                }
+            }
+        },
+        "groupBoxAcciones": {
+            "componente": "YBGroupBox",
+            "className": "",
+            "style": {},
+            "layout": {
+                "nuevoAlbaranAgente": {
+                    "componente": "YBButton",
+                    "label": "Añadir",
+                    "className": "floatLeft",
+                    "buttonType": "raised",
+                    "secondary": true,
+                    "primary": false,
+                    "prefix": "albaranescli",
+                    "action": {
+                        "key": "nuevoalbaranagente",
+                        "success": [{"custom": "albaranesagente", "slot": "refrescar"}]
+                    }
+                }
+            }
+        }
+    },
+    "acciones": {
+
+    }
+}

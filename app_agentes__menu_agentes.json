@@ -1,0 +1,11 @@
+{
+    "items": [
+        {
+            "NAME": "albaranescli",
+            "TEXT": "albaranescli",
+            "URL": "agentes/albaranescli/custom/albaranesagente",
+            "ICON": "dashboard",
+            "COLOR": "rgb(30, 170, 30)"
+        }
+    ]
+}

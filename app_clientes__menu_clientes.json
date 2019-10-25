@@ -1,0 +1,18 @@
+{
+    "items": [
+        {
+            "NAME": "cliente",
+            "TEXT": "FACTURAS",
+            "URL": "clientes/facturascli/custom/cliente",
+            "ICON": "dashboard",
+            "COLOR": "rgb(30, 170, 30)"
+        },
+        {
+            "NAME": "solicitud",
+            "TEXT": "Solicitar presupuesto",
+            "URL": "clientes/presupuestoscli/custom/solicitud",
+            "ICON": "dashboard",
+            "COLOR": "rgb(30, 170, 30)"
+        }
+    ]
+}

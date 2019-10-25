@@ -1,0 +1,243 @@
+{
+    "initValidation": {
+        "error": {
+            "aplic": "agentes",
+            "prefix": "albaranescli",
+            "template": "albaranesagente",
+            "msg": "No pertenece a tu usuario"
+        }
+    },
+    "querystring": {},
+    "schema": {
+        "lineasalbaranescli": {
+            "rel": "idalbaran",
+            "querystring": {}
+        }
+    },
+    "title": "Albaran de Cliente",
+    "layout": {
+        "articuosForm": {
+            "prefix": "albaranescli",
+            "componente": "YBForm",
+            "class": "claseGrid",
+            "submit": "update",
+            "visible": true,
+            "send": true,
+            "return": true,
+            "success": [{"slot": "refrescar"}],
+            "groupbox": "",
+            "fields": {
+                "gb__": {
+                    "title": "",
+                    "fields": {
+                        "codigo": {"disabled": true},
+                        "codagente": {                    
+                            "rel": "agentes",
+                            "aplic": "principal",
+                            "key": "codagente",
+                            "desc": "nombre",
+                            "disabled": true
+                        },
+                        "codcliente": {                            
+                            "rel": "clientes",
+                            "aplic": "principal",
+                            "key": "codcliente",
+                            "desc": "nombre",
+                            "disabled": true
+                        },
+                        "codalmacen": {                            
+                            "rel": "almacenes",
+                            "aplic": "principal",
+                            "key": "codalmacen",
+                            "desc": "nombre"
+                        },
+                        "codpago": {                            
+                            "rel": "formaspago",
+                            "aplic": "principal",
+                            "key": "codpago",
+                            "desc": "codpago"
+                        },
+                        "bi_idprovinciaentrega": {},
+                        "bi_ordendecarga": {}
+                    }
+                }      
+            },
+            "exclude": {}    
+        },
+        "groupBoxInfo": {
+            "componente": "YBGroupBox",
+            "className": "",
+            "visible": false,
+            "style": {
+                "float": "left",
+                "overflow": "hidden"
+            },
+            "layout": {
+                "labelCodigo": {
+                    "componente": "YBLabel",
+                    "text": "%yb1",
+                    "style": {
+                        "fontSize": "16px",
+                        "fontWeight": "bold",
+                        "width": "100%",
+                        "textAlign": "center"
+                    },
+                    "params": [
+                        {"type": "model", "key": "codigo"}
+                    ]
+                }
+            }
+        },
+        "groupBoxTotales": {
+            "componente": "YBGroupBox",
+            "className": "",
+            "style": {
+                "float": "left",
+                "marginBotton": "50px",
+                "overflow": "hidden"
+            },
+            "layout": {
+                "labelNeto": {
+                    "componente": "YBLabel",
+                    "text": "Neto:  %yb1 €",
+                    "className": "floatingLabel3 floatingLabelLeft",
+                    "style": {
+                    },
+                    "params": [
+                        {"type": "model", "key": "neto"}
+                    ]
+                },
+                "labelIVA": {
+                    "componente": "YBLabel",
+                    "text": "IVA:   %yb1 €",
+                    "className": "floatingLabel3 floatingLabelCenter",
+                    "style": {
+                    },
+                    "params": [
+                        {"type": "model", "key": "totaliva"}
+                    ]
+                },
+                "labelInformacion": {
+                    "componente": "YBLabel",
+                    "text": "Total: %yb1 €",
+                    "className": "floatingLabel3 floatingLabelRight",
+                    "style": {
+                    },
+                    "params": [
+                        {"type": "model", "key": "total"}
+                    ]
+                }
+            }
+        },
+        "masterLineasalbaranescli": {
+            "componente": "YBTable",
+            "class": "claseGrid",
+            "label": "",
+            "prefix": "lineasalbaranescli",
+            "filter": "",
+            "paginacion": true,
+            "columns": [
+                {"tipo": "field", "key": "descripcion", "width": 100},
+                {
+                    "tipo": "field", 
+                    "label": "Cantidad", 
+                    "key": "cantidad", 
+                    "width": 100,
+                    "editable": true,
+                    "type": "number",
+                    "act": {
+                        "key": "editarCantidad",
+                        "success": [
+                            {"slot": "refrescar"}
+                        ],
+                        "error": [{"slot": "toast", "mensaje": "Error inesperado, riesgo máximo alcanzado"}]
+                    }
+                },
+                {
+                    "tipo": "field", 
+                    "label": "PVP", 
+                    "key": "pvpunitario", 
+                    "width": 60,
+                    "editable": true,
+                    "type": "number",
+                    "act": {
+                        "key": "editarPvpArticulo",
+                        "success": [
+                            {"slot": "refrescar"}
+                        ],
+                        "error": [{"slot": "toast", "mensaje": "Error inesperado, riesgo máximo alcanzado"}]
+                    }
+                },
+                {"tipo": "field", "key": "pvptotal", "width": 120},
+                {"tipo": "field", "key": "cuotaieh", "label": "Cuota IEH", "width": 120, "type": "number"},
+                {
+                    "tipo": "act",
+                    "key": "delete",
+                    "label": "Borrar Linea",
+                    "success": [
+                        {"slot": "refrescar"}
+                    ]
+                }
+            ],
+            "rowclick": "",
+            "accionesGrid": [
+                {
+                    "key": "nuevalineaalbaran",
+                    "label": "Ver todo",
+                    "prefix": "albaranescli",
+                    "success": [{"slot": "refrescar"}]
+                }
+            ]
+        }
+    },
+    "acciones": {
+        "delete": {
+            "action": "deleteRow",
+            "icon": "delete"
+        },
+        "nuevalineaalbaran": {
+            "action": "legacy",
+            "prefix": "albaranescli",
+            "serverAction": "nuevalineaalbaran",
+            "icon": "add_circle",
+            "params": [
+                {
+                    "tipo": 5,
+                    "componente": "YBFieldDB",
+                    "prefix": "otros",
+                    "label": "Articulo",
+                    "key": "codarticulo",
+                    "clientoptionslist": {"GOA": "GASOIL", "GOB": "GASOILB", "GOC": "GASOILC", "SP95": "GASOLINA", "SP98": "SP98"}
+                }
+            ]
+        },
+        "editarCantidad": {
+            "action": "legacy",
+            "icon": "add_circle",
+            "serverAction": "editarCantidad",
+            "prefix": "lineasalbaranescli",
+            "params": [
+                {
+                    "tipo": 3,
+                    "verbose_name": "cantidad",
+                    "key": "cantidad",
+                    "validaciones": null
+                }
+            ]
+        },
+        "editarPvpArticulo": {
+            "action": "legacy",
+            "icon": "add_circle",
+            "serverAction": "editarPvpArticulo",
+            "prefix": "lineasalbaranescli",
+            "params": [
+                {
+                    "tipo": 3,
+                    "verbose_name": "PVP",
+                    "key": "pvpunitario",
+                    "validaciones": null
+                }
+            ]
+        }
+    }
+}

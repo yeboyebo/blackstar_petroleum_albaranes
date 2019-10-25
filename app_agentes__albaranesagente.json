@@ -1,0 +1,80 @@
+{
+    "querystring": {
+        "p_l": 50,
+        "p_c": true,
+        "o_1": "-fecha",
+        "o_2": "idalbaran",
+        "s_ptefactura__exact": true, 
+        "f_albaranesagente": null
+    },
+    "schema": {},
+    "layout": {
+        "labelAgente": {
+            "componente": "YBLabel",
+            "text": "%yb1",
+            "style": {
+                "fontSize": "19px",
+                "textAlign": "center",
+                "width": "100%",
+                "fontWeight": "bold"
+            },
+            "params": [{"type": "calc", "key": "nombreAgente"}]
+        },
+        "groupBoxAcciones": {
+            "componente": "YBGroupBox",
+            "className": "",
+            "style": {},
+            "layout": {
+                "nuevoAlbaranAgente": {
+                    "componente": "YBButton",
+                    "label": "Añadir",
+                    "className": "floatRight",
+                    "buttonType": "raised",
+                    "secondary": true,
+                    "primary": false,
+                    "prefix": "albaranescli",
+                    "action": {
+                        "key": "nuevoalbaranagente",
+                        "success": [{"custom": "albaranesagente", "slot": "refrescar"}]
+                    }
+                }
+            }
+        },
+        "masterAlbaranesAgente": {
+            "componente": "YBList",
+            "prefix": "albaranescli",
+            "filter": "buscador",
+            "colorRowField": "rowColor",
+            "columns": [
+                {"tipo": "field", "key": "codalmacen","label":"Instalación", "width": 60},
+                {"tipo": "field", "listpos": "title", "key": "fecha", "width": 100},
+                {"tipo": "field", "listpos": "body", "key": "nombrecliente", "width": 200, "avatar": true},
+                {"tipo": "field", "listpos": "secondaryitem", "key": "total", "width": 100},
+                {"tipo": "field", "listpos": "body", "key": "codigo", "width": 100},
+                {"tipo": "field", "listpos": "body", "key": "bi_ordendecarga", "width": 200},
+                {
+                    "tipo": "act",
+                    "key": "delete",
+                    "label": "Delete",
+                    "success": [{"receiver": "tdb_bancos", "slot": "refrescar"}]
+                }
+            ],
+            "rowclick": "link"
+        }
+    },
+    "acciones": {
+        "delete": {
+            "action": "deleteRow",
+            "icon": "delete"
+        },
+        "nuevoalbaranagente": {
+            "action": "goto",
+            "serverAction": "damenuevoalbaran"
+        },
+        "nuevoalbaran": {
+            "action": "legacy",
+            "serverAction": "nuevoalbaran",
+            "icon": "cloud_download"
+        }
+    }
+}
