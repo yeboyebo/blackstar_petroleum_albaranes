@@ -46,7 +46,6 @@
             "filter": "buscador",
             "colorRowField": "rowColor",
             "columns": [
-                {"tipo": "field", "key": "codalmacen","label":"Instalación", "width": 60},
                 {"tipo": "field", "listpos": "title", "key": "fecha", "width": 100},
                 {"tipo": "field", "listpos": "body", "key": "nombrecliente", "width": 200, "avatar": true},
                 {"tipo": "field", "listpos": "secondaryitem", "key": "total", "width": 100},

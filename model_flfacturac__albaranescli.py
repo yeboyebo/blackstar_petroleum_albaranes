@@ -36,3 +36,9 @@ class blackstar_petroleum_albaranes_albaranescli(flfacturac_albaranescli, helper
     def damenuevoalbaran(self):
         return form.iface.damenuevoalbaran(self)
 
+    def iniciaValoresCursor(cursor=None):
+        return form.iface.iniciaValoresCursor(cursor)
+
+    def dameEjercicioActualBlackstar(fecha):
+        return form.iface.dameEjercicioActualBlackstar(fecha)
+

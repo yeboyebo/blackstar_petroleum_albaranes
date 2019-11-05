@@ -42,9 +42,14 @@ class blackstar_petroleum_albaranes(interna):
     def blackstar_petroleum_albaranes_getFilters(self, model, name, template=None):
         filters = []
         if name == 'pedidosagente':
+            aEjercicios = []
+            codejercicios = qsatype.FactoriaModulos.get('flfactppal').iface.dameEjerciciosEmpresa(6)
+            codejercicios = codejercicios.replace("'", "")
+            aEjercicios = codejercicios.split(",")
+            filters = [{'criterio': 'codejercicio__in', 'valor': aEjercicios}]
             usr = qsatype.FLUtil.nameUser()
             agente = agentes.objects.filter(dnicif__exact=usr)
-            return [{'criterio': 'codagente__in', 'valor': [agente[0].codagente]}]
+            filters.append({'criterio': 'codagente__in', 'valor': [agente[0].codagente]})
         return filters
 
     def blackstar_petroleum_albaranes_getForeignFields(self, model, template=None):

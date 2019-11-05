@@ -141,6 +141,14 @@
             {
                 "path": "config/",
                 "name": "dependencias.json"
+            },
+            {
+                "name": "logo.png",
+                "path": "assets/dist/img/logo/"
+            },
+            {
+                "name": "icon.png",
+                "path": "assets/dist/img/logo/"
             }
         ],
         "patchJson": [

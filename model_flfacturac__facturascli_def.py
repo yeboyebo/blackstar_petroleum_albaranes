@@ -19,12 +19,18 @@ class blackstar_petroleum_albaranes(interna):
         return []
 
     def blackstar_petroleum_albaranes_getFilters(self, model, name, template):
+        filters = []
         if name == 'facturascliente':
+            aEjercicios = []
+            codejercicios = qsatype.FactoriaModulos.get('flfactppal').iface.dameEjerciciosEmpresa(6)
+            codejercicios = codejercicios.replace("'", "")
+            aEjercicios = codejercicios.split(",")
+            filters = [{'criterio': 'codejercicio__in', 'valor': aEjercicios}]
             usr = qsatype.FLUtil.nameUser()
             cliente = clientes.objects.filter(cifnif__exact=usr)
-            return [{'criterio': 'codcliente__in', 'valor': [cliente[0].codcliente]}]
+            filters.append({'criterio': 'codcliente__in', 'valor': [cliente[0].codcliente]})
 
-        return []
+        return filters
 
     def blackstar_petroleum_albaranes_facturaCliente(self, model):
         report = {}

@@ -19,6 +19,7 @@ class blackstar_petroleum_albaranes(flfacturac):
     def blackstar_petroleum_albaranes_envioPresupuesto(self, model, oParam):
         print("____", oParam)
         print(qsatype.FLUtil.nameUser())
+        cliente = ""
         q = qsatype.FLSqlQuery()
         q.setTablesList(u"clientes")
         q.setSelect(u"nombre")

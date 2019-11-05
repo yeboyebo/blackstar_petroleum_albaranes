@@ -41,7 +41,7 @@
         },
         "groupBoxAcciones": {
             "componente": "YBGroupBox",
-            "className": "actionGB",
+            "className": "",
             "layout": {
                 "envioMailButton": {
                     "componente": "YBButton",

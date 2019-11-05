@@ -1,5 +1,6 @@
 
 # @class_declaration blackstar_petroleum_albaranes #
+from models.flfactppal.agentes import agentes
 
 
 class blackstar_petroleum_albaranes(flfacturac):
@@ -15,6 +16,8 @@ class blackstar_petroleum_albaranes(flfacturac):
         labels = {}
         usr = qsatype.FLUtil.nameUser()
         agente = agentes.objects.filter(dnicif__exact=usr)
+        if not agente:
+            return labels
         apellidos = agente[0].apellidos
         nombre = agente[0].nombre + " " + apellidos
         labels["nombreAgente"] = nombre
@@ -27,9 +30,14 @@ class blackstar_petroleum_albaranes(flfacturac):
     def blackstar_petroleum_albaranes_getFilters(self, model, name, template=None):
         filters = []
         if name == 'albaranesagente':
+            aEjercicios = []
+            codejercicios = qsatype.FactoriaModulos.get('flfactppal').iface.dameEjerciciosEmpresa(6)
+            codejercicios = codejercicios.replace("'", "")
+            aEjercicios = codejercicios.split(",")
+            filters = [{'criterio': 'codejercicio__in', 'valor': aEjercicios}]
             usr = qsatype.FLUtil.nameUser()
             agente = agentes.objects.filter(dnicif__exact=usr)
-            return [{'criterio': 'codagente__in', 'valor': [agente[0].codagente]}]
+            filters.append({'criterio': 'codagente__in', 'valor': [agente[0].codagente]})
         return filters
 
     def blackstar_petroleum_albaranes_getForeignFields(self, model, template=None):
@@ -106,7 +114,7 @@ class blackstar_petroleum_albaranes(flfacturac):
             return resul
 
         _cFL = qsatype.FactoriaModulos.get('formRecordlineasalbaranescli').iface.pub_commonCalculateField
-        descripcion = qsatype.FLUtil.sqlSelect(u"articulos", u"descripcion", ustr(u"referencia = '", oParam['codarticulo'], "'"))
+        descripcion = qsatype.FLUtil.sqlSelect(u"articulos", u"descripcion", u"referencia = '{}'".format(oParam['codarticulo']))
         curL = qsatype.FLSqlCursor(u"lineasalbaranescli")
         curL.setModeAccess(curL.Insert)
         curL.refreshBuffer()
@@ -123,6 +131,23 @@ class blackstar_petroleum_albaranes(flfacturac):
         if not curL.commitBuffer():
             return False
         return True
+
+    def blackstar_petroleum_albaranes_iniciaValoresCursor(self, cursor=None):
+        _i = self.iface
+        qsatype.FactoriaModulos.get('formRecordpedidoscli').iface.iniciaValoresCursor(cursor)
+        hoy = qsatype.Date()
+        codejercicio = _i.dameEjercicioActualBlackstar(hoy)
+        cursor.setValueBuffer("codejercicio", codejercicio)
+        # De momento no se filtran los clientes por agente al crear albaran.
+        # codagente = qsatype.FLUtil.sqlSelect(u"agentes", u"codagente", u"dnicif = '{}'".format(qsatype.FLUtil.nameUser()))
+        # if codagente:
+        #     cursor.setValueBuffer("codagente", codagente)
+        return True
+
+    def blackstar_petroleum_albaranes_dameEjercicioActualBlackstar(self, fecha):
+        codejercicio = ""
+        codejercicio = qsatype.FLUtil.sqlSelect(u"ejercicios", u"codejercicio", u"fechainicio <= '{0}' AND fechafin >= '{0}' AND idempresa = 6 AND estado = 'ABIERTO'".format(fecha))
+        return codejercicio
 
     def __init__(self, context=None):
         super().__init__(context)
@@ -153,4 +178,10 @@ class blackstar_petroleum_albaranes(flfacturac):
 
     def nuevalineaalbaran(self, model, oParam, cursor):
         return self.ctx.blackstar_petroleum_albaranes_nuevalineaalbaran(model, oParam, cursor)
+
+    def iniciaValoresCursor(self, cursor=None):
+        return self.ctx.blackstar_petroleum_albaranes_iniciaValoresCursor(cursor)
+
+    def dameEjercicioActualBlackstar(self, fecha):
+        return self.ctx.blackstar_petroleum_albaranes_dameEjercicioActualBlackstar(fecha)
 
