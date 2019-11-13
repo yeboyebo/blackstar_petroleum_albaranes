@@ -134,7 +134,7 @@ class blackstar_petroleum_albaranes(flfacturac):
 
     def blackstar_petroleum_albaranes_iniciaValoresCursor(self, cursor=None):
         _i = self.iface
-        qsatype.FactoriaModulos.get('formRecordpedidoscli').iface.iniciaValoresCursor(cursor)
+        qsatype.FactoriaModulos.get('formRecordalbaranescli').iface.iniciaValoresCursor(cursor)
         hoy = qsatype.Date()
         codejercicio = _i.dameEjercicioActualBlackstar(hoy)
         cursor.setValueBuffer("codejercicio", codejercicio)
